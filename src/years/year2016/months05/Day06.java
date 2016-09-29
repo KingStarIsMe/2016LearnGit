@@ -2,7 +2,7 @@ package years.year2016.months05;
 
 public class Day06 {
 	/**
-	 * 获得两个整形二进制表达位数不同的数量
+	 * 获得两个整形二进制表达位数不同的数量 
 	 * 
 	 * @param m
 	 *            整数m
