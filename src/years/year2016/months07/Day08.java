@@ -12,6 +12,8 @@ public class Day08 {
 		Day08 d = new Day08();
 		File file = new File(path);
 		Map<String,Long> map = d.showFileInformation(file);
+		HashMap<String, String> a = new HashMap<String, String>();
+		a.get("");
 		long data_total = map.get("data_total");
 		long data_size = map.get("data_size");
 		System.out.println("文件路径："+path+" 其下属文件数量："+data_total+" 文件大小："+(data_size/1024/1024/1024)+"G（"+data_size +" 字节）");
