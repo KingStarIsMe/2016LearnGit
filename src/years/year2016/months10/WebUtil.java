@@ -1,10 +1,14 @@
 package years.year2016.months10;
 
+import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,6 +28,52 @@ public class WebUtil {
 		File f = new File(dir);
 		if(!f.exists()){
 			f.mkdirs();
+		}
+	}
+	
+	/**
+	 * 下载文字
+	 * @param src
+	 * @param filename
+	 * @param dir
+	 * @throws IOException 
+	 */
+	public static void downloadText(String data,String filename,String dir) throws IOException{
+		File filedir = new File(dir);
+		if(!filedir.exists()){
+			filedir.mkdirs();
+		}
+		File file = new File(dir+filename);
+		if(!file.exists()){
+			file.createNewFile();
+		}
+		if(data !=null){
+			FileWriter fw = null;
+			try {
+				fw = new FileWriter(dir+filename,true);
+				fw.write(data);
+				fw.write("\r\n");
+				fw.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				closeData(fw);
+			}
+		}
+	}
+	/**
+	 * 关闭流
+	 * @param c
+	 */
+	public static void closeData(Closeable c){
+		if(c!=null){
+			try {
+				c.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	/**
