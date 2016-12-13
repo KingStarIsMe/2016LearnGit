@@ -30,7 +30,30 @@ public class WebUtil {
 			f.mkdirs();
 		}
 	}
-	
+	/**
+	 * 返回文件或者文件的大小
+	 * @param file
+	 * @return
+	 */
+	public static double getFileSize(File file){
+		double ss =0;
+		if(file.exists()){
+			if(file.isFile()){
+				ss = (double)file.length()/1024/1024;
+//				System.out.println(file.getName()+" : "+ss+"MB");
+				return ss;
+			}else{
+				File[]files = file.listFiles();
+				for(File f:files){
+					ss+=getFileSize(f);
+				}
+				return ss;
+			}
+		}else{
+			System.out.println("当前文件不存在,请检查路径");
+		}
+		return ss;
+	}
 	/**
 	 * 下载文字
 	 * @param src
