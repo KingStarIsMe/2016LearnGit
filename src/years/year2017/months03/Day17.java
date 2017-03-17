@@ -22,7 +22,7 @@ public class Day17 {
 		for(int i=0;i<length;i++){
 			map.put(in[i], i);
 		}
-		TreeNode root = createBinaryTree(pre, 0, length - 1, in, 0, length - 1,map);
+		TreeNode root = createBinaryTree_map(pre, 0, length - 1, in, 0, length - 1,map);
 		return root;
 	}
 	/**
@@ -35,7 +35,7 @@ public class Day17 {
 	 * @param mend
 	 * @return
 	 */
-	private TreeNode createBinaryTree(int[] front, int fstart, int fend,
+	private TreeNode createBinaryTree_for(int[] front, int fstart, int fend,
 			int[] middle, int mstart, int mend) {
 		int rootval = front[fstart];
 		TreeNode root = new TreeNode(rootval);
@@ -55,16 +55,16 @@ public class Day17 {
 		int lleft = index_m - mstart;
 		int lright = mend - index_m;
 		if (lleft > 0) {
-			root.left = createBinaryTree(front, fstart + 1, fstart + lleft,
+			root.left = createBinaryTree_for(front, fstart + 1, fstart + lleft,
 					middle, mstart, index_m - 1);
 		}
 		if (lright > 0) {
-			root.right = createBinaryTree(front, fstart + lleft + 1, fend,
+			root.right = createBinaryTree_for(front, fstart + lleft + 1, fend,
 					middle, index_m + 1, mend);
 		}
 		return root;
 	}
-	private TreeNode createBinaryTree(int[] front, int fstart, int fend,
+	private TreeNode createBinaryTree_map(int[] front, int fstart, int fend,
 			int[] middle, int mstart, int mend, Map<Integer,Integer >map) {
 		int rootval = front[fstart];
 		TreeNode root = new TreeNode(rootval);
@@ -79,42 +79,48 @@ public class Day17 {
 		int lleft = index_m - mstart;
 		int lright = mend - index_m;
 		if (lleft > 0) {
-			root.left = createBinaryTree(front, fstart + 1, fstart + lleft,
+			root.left = createBinaryTree_map(front, fstart + 1, fstart + lleft,
 					middle, mstart, index_m - 1,map);
 		}
 		if (lright > 0) {
-			root.right = createBinaryTree(front, fstart + lleft + 1, fend,
+			root.right = createBinaryTree_map(front, fstart + lleft + 1, fend,
 					middle, index_m + 1, mend,map);
 		}
 		return root;
 	}
-    Stack<Integer> stack1 = new Stack<Integer>();
-    Stack<Integer> stack2 = new Stack<Integer>();
-    
-    public void push(int node) {
-    	stack1.push(node);
-    }
-    
-    public int pop() {
-    	if(stack2.isEmpty() && !stack1.isEmpty()){
-    		while(!stack1.isEmpty()){
-        		stack2.push(stack1.pop());
-        	}
-    	}
-    	if(!stack2.isEmpty()){
-    		return stack2.pop();
-    	}else {
-    		throw new RuntimeException();
-    	}
-    }
-    public int pop2() {
-        while(!stack1.isEmpty()){
-            stack2.push(stack1.pop());
-        }
-        int first=stack2.pop();
-        while(!stack2.isEmpty()){
-            stack1.push(stack2.pop());
-        }
-        return first;
-    }
+	
+	/**
+	 * 两个栈实现对列
+	 */
+	class MyQueue{
+	    Stack<Integer> stack1 = new Stack<Integer>();
+	    Stack<Integer> stack2 = new Stack<Integer>();
+	    
+	    public void push(int node) {
+	    	stack1.push(node);
+	    }
+	    
+	    public int pop() {
+	    	if(stack2.isEmpty() && !stack1.isEmpty()){
+	    		while(!stack1.isEmpty()){
+	        		stack2.push(stack1.pop());
+	        	}
+	    	}
+	    	if(!stack2.isEmpty()){
+	    		return stack2.pop();
+	    	}else {
+	    		throw new RuntimeException();
+	    	}
+	    }
+	    public int pop_full() {
+	        while(!stack1.isEmpty()){
+	            stack2.push(stack1.pop());
+	        }
+	        int first=stack2.pop();
+	        while(!stack2.isEmpty()){
+	            stack1.push(stack2.pop());
+	        }
+	        return first;
+	    }
+	}
 }
