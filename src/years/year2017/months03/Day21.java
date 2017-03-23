@@ -111,5 +111,6 @@ public class Day21 {
 	 public int JumpFloorII_(int target) {
 	        return 1<<--target;
 	 }
+	 
 	
 }
