@@ -1,6 +1,8 @@
 package years.year2017.months06;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Day15 {
 	public class TreeLinkNode {
@@ -76,5 +78,43 @@ public class Day15 {
     	}
     	 return judgeTreeSymmetrical(l.left, r.right)&&judgeTreeSymmetrical(r.left, l.right);
     }
-    
+    public ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+    	ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+    	if(pRoot==null){
+    		return list;
+    	}
+    	ArrayList<Integer> l = new ArrayList<Integer>();
+    	LinkedList<TreeNode> llt = new LinkedList<TreeNode>();
+    	llt.addLast(null);//分隔符
+    	llt.addLast(pRoot);
+    	boolean ltor = true;
+    	while(llt.size()!=1){
+    		TreeNode node = llt.removeFirst();
+    		if(node==null){
+    			Iterator<TreeNode> iter = null;
+    			if(ltor){
+    				iter = llt.iterator();
+    			}else{
+    				iter = llt.descendingIterator();
+    			}
+    			ltor = !ltor;
+    			while(iter.hasNext()){
+    				TreeNode temp = iter.next();
+    				l.add(temp.val);
+    			}
+    			list.add(l);
+    			l.clear();
+    			llt.addLast(null);
+    			continue;
+    		}
+    		if(node.left!=null){
+    			llt.addLast(node.left);
+    		}
+    		if(node.right!=null){
+    			llt.addLast(node.right);
+    		}
+    	}
+    	
+    	return list;
+    }
 }
