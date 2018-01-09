@@ -15,13 +15,14 @@ public class SocketClient {
 		Scanner scanner = new Scanner(System.in);
 		SocketWrapper socket=null;
 		try {
-			socket = new SocketWrapper(new Socket("127.0.0.1",6666));//测试git2016年9月29日 14:26:25
+			socket = new SocketWrapper(new Socket("192.168.1.46",6666));//测试git2016年9月29日 14:26:25
 			System.out.println("已经连接到服务端，可以开始输入数据进行通讯了");
 			String sendMsg = scanner.nextLine();
 			socket.writerLine(sendMsg);
 			String recivedMsg = socket.readLine();
 			while(!"close".equals(recivedMsg)){
 				System.out.println("---[服务端返回]---"+recivedMsg);
+				sendMsg = scanner.nextLine();
 				socket.writerLine(sendMsg);//发送消息
 				recivedMsg = socket.readLine();
 			}
