@@ -5,8 +5,25 @@ public class Day24 {
 		Day24 d = new Day24();
 		javaProblem_drawRound d1 =d.new javaProblem_drawRound();
 		d1.drawRound(5);
+		char a='a';
+		d.isChinese(a);
 	}
-	
+	public boolean isChinese(char a){
+		/*char b=0x4E00;
+		System.out.println(b);
+		char c=0x9fa5;
+		System.out.println(c);
+		System.out.println(c-b);
+		for(int i=0,l=c-b;i<l;i++){
+			char t = b++;
+			if(i%20==0){
+				System.out.println(t+"--"+(int)t+",");
+			}else{
+				System.out.print(t+"--"+(int)t+",");
+			}
+		}*/
+		return a>=0x4E00 && a<=0x9fa5;
+	}
 	class javaProblem_drawRound{
 
 		/**
